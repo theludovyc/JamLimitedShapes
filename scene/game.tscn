@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://ms2jfbq0vp1o"]
+
+[ext_resource type="Texture2D" uid="uid://1kpyunnq8rmu" path="res://icon.svg" id="1_5kiuu"]
+[ext_resource type="Script" uid="uid://dd3m0qvakuskm" path="res://Script/node_2d.gd" id="1_dbls1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n4st5"]
+bounce = 0.5
+
+[sub_resource type="Curve2D" id="Curve2D_dbls1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 158, 438, 0, 0, 0, 0, 328, 439)
+}
+point_count = 2
+
+[node name="Game" type="Node"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_n4st5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(84, 203)
+build_mode = 1
+polygon = PackedVector2Array(74, 235, -16, 414, 158, 578, 328, 411, 244, 237, 301, 104, 160, -33, 17, 102)
+
+[node name="Balls" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_dbls1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(158, 438)
+rotation = 0.00588229
+rotates = false
+loop = false
+
+[node name="Node2D" type="Node2D" parent="Path2D/PathFollow2D" node_paths=PackedStringArray("Balls")]
+script = ExtResource("1_dbls1")
+Balls = NodePath("../../../Balls")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Node2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_5kiuu")
