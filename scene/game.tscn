@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ms2jfbq0vp1o"]
+[gd_scene load_steps=8 format=3 uid="uid://ms2jfbq0vp1o"]
 
 [ext_resource type="Script" uid="uid://dd3m0qvakuskm" path="res://Script/node_2d.gd" id="1_dbls1"]
 [ext_resource type="Script" uid="uid://ckwek4ifek6er" path="res://Script/container.gd" id="1_xwcet"]
@@ -15,6 +15,8 @@ point_count = 2
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_33cqm"]
 gradient = ExtResource("2_33cqm")
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_33cqm"]
 
 [node name="Game" type="Node"]
 
@@ -45,5 +47,11 @@ colors_grad = SubResource("GradientTexture1D_33cqm")
 
 [node name="Timer" type="Timer" parent="Path2D/PathFollow2D/Node2D"]
 one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_33cqm")
 
 [connection signal="timeout" from="Path2D/PathFollow2D/Node2D/Timer" to="Path2D/PathFollow2D/Node2D" method="_on_timer_timeout"]

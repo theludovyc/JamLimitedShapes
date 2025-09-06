@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		
 		Balls.add_child(ball)
 		
-		ball.freeze = false
+		ball.process_mode = Node.PROCESS_MODE_INHERIT
 		
 		next_radius = randi_range(0, 3)
 	
