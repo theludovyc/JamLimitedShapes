@@ -1,18 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://c276xtrlp4eko"]
+[gd_scene load_steps=6 format=3 uid="uid://c276xtrlp4eko"]
 
 [ext_resource type="Script" uid="uid://drfqdqb6fjdcj" path="res://Script/ball.gd" id="1_d8dhm"]
+[ext_resource type="Gradient" uid="uid://b4nm4ae7h44fo" path="res://Art/gradient.tres" id="2_h45nl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5kiuu"]
 bounce = 0.2
 absorbent = true
 
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lhhrc"]
+gradient = ExtResource("2_h45nl")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5kiuu"]
+radius = 12.0
 
 [node name="Ball" type="RigidBody2D" groups=["Ball"]]
 physics_material_override = SubResource("PhysicsMaterial_5kiuu")
+freeze = true
 contact_monitor = true
 max_contacts_reported = 6
 script = ExtResource("1_d8dhm")
+colors_grad = SubResource("GradientTexture1D_lhhrc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5kiuu")
