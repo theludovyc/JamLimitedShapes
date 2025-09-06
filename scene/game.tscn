@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ms2jfbq0vp1o"]
+[gd_scene load_steps=9 format=3 uid="uid://ms2jfbq0vp1o"]
 
 [ext_resource type="Script" uid="uid://dd3m0qvakuskm" path="res://Script/node_2d.gd" id="1_dbls1"]
 [ext_resource type="Script" uid="uid://ckwek4ifek6er" path="res://Script/container.gd" id="1_xwcet"]
 [ext_resource type="Gradient" uid="uid://b4nm4ae7h44fo" path="res://Art/gradient.tres" id="2_33cqm"]
+[ext_resource type="Script" uid="uid://x2kniliynv1o" path="res://Script/dead_line.gd" id="4_xwcet"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n4st5"]
 bounce = 0.5
@@ -17,6 +18,8 @@ point_count = 2
 gradient = ExtResource("2_33cqm")
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_33cqm"]
+a = Vector2(158, 438)
+b = Vector2(328, 439)
 
 [node name="Game" type="Node"]
 
@@ -28,8 +31,6 @@ position = Vector2(84, 203)
 build_mode = 1
 polygon = PackedVector2Array(74, 235, -16, 414, 158, 578, 328, 411, 244, 237, 301, 104, 160, -33, 17, 102)
 script = ExtResource("1_xwcet")
-
-[node name="Balls" type="Node2D" parent="."]
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_dbls1")
@@ -48,10 +49,13 @@ colors_grad = SubResource("GradientTexture1D_33cqm")
 [node name="Timer" type="Timer" parent="Path2D/PathFollow2D/Node2D"]
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
-monitorable = false
+[node name="Balls" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="dead_line" type="Area2D" parent="."]
+monitorable = false
+script = ExtResource("4_xwcet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dead_line"]
 shape = SubResource("SegmentShape2D_33cqm")
 
 [connection signal="timeout" from="Path2D/PathFollow2D/Node2D/Timer" to="Path2D/PathFollow2D/Node2D" method="_on_timer_timeout"]
