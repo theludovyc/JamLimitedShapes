@@ -37,7 +37,5 @@ func _process(delta: float) -> void:
 		next_radius = randi_range(0, 3)
 
 func _draw():
-	draw_line(to_local(Vector2.ZERO), to_local(global_position), Color.BROWN)
-	
-	draw_circle(to_local(global_position), 10 * (1 + next_radius * 0.25),
+	draw_circle(to_local(global_position), 10 * (1 + next_radius * 0.5),
 	colors_grad.gradient.sample(remap(next_radius, 0, 8, 0, 1)))

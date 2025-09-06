@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ms2jfbq0vp1o"]
+[gd_scene load_steps=9 format=3 uid="uid://ms2jfbq0vp1o"]
 
 [ext_resource type="Script" uid="uid://cyue5783gn3se" path="res://Script/balls.gd" id="1_33cqm"]
 [ext_resource type="Script" uid="uid://dd3m0qvakuskm" path="res://Script/node_2d.gd" id="1_dbls1"]
+[ext_resource type="Script" uid="uid://ckwek4ifek6er" path="res://Script/container.gd" id="1_xwcet"]
 [ext_resource type="Gradient" uid="uid://b4nm4ae7h44fo" path="res://Art/gradient.tres" id="2_33cqm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n4st5"]
@@ -28,6 +29,7 @@ physics_material_override = SubResource("PhysicsMaterial_n4st5")
 position = Vector2(84, 203)
 build_mode = 1
 polygon = PackedVector2Array(74, 235, -16, 414, 158, 578, 328, 411, 244, 237, 301, 104, 160, -33, 17, 102)
+script = ExtResource("1_xwcet")
 
 [node name="Balls" type="Node2D" parent="."]
 script = ExtResource("1_33cqm")

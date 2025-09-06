@@ -16,5 +16,5 @@ func _process(_delta: float) -> void:
 
 func _draw():
 	for ball in get_children():
-		draw_circle(ball.position, 10 * (1 + ball.radius * 0.25),
+		draw_circle(ball.position, 10 * (1 + ball.radius * 0.5),
 		colors_grad.gradient.sample(remap(ball.radius, 0, 8, 0, 1)))
