@@ -15,9 +15,7 @@ func set_radius(i:float):
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Ball"):
-		if body.radius != radius:
-			return
+		if body.radius == radius:
+			set_radius(radius * 2)
 		
-		set_radius(radius * 2)
-		
-		body.queue_free()
+			body.queue_free()
