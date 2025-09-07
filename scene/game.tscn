@@ -13,7 +13,7 @@ bounce = 0.5
 
 [sub_resource type="Curve2D" id="Curve2D_dbls1"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 158, 438, 0, 0, 0, 0, 328, 439)
+"points": PackedVector2Array(0, 0, 0, 0, 104, 307, 0, 0, 0, 0, 384, 307)
 }
 point_count = 2
 
@@ -45,7 +45,7 @@ script = ExtResource("1_xwcet")
 curve = SubResource("Curve2D_dbls1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(158, 438)
+position = Vector2(104, 307)
 rotation = 0.00588229
 rotates = false
 loop = false
@@ -65,7 +65,7 @@ script = ExtResource("4_xwcet")
 shape = SubResource("SegmentShape2D_33cqm")
 
 [node name="Timer" type="Timer" parent="dead_line"]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [node name="UI" type="Control" parent="."]

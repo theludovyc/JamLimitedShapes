@@ -12,7 +12,7 @@ func _draw() -> void:
 	draw_line(to_local(coll.shape.a), to_local(coll.shape.b), Color.RED)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Ball"):
+	if timer.is_stopped() and body.is_in_group("Ball"):
 		timer.start()
 
 func _on_timer_timeout() -> void:

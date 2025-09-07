@@ -6,7 +6,9 @@ signal evolved(radius)
 
 @onready var coll = $CollisionShape2D
 
-var radius = 0
+@onready var label = $Label
+
+var radius := 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -17,6 +19,8 @@ func set_radius(i:float):
 	var final_scale = 1 + 0.5 * radius
 	
 	coll.scale = Vector2(final_scale, final_scale)
+	
+	label.text = str(radius)
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Ball") and \
