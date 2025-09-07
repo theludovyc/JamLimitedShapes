@@ -32,14 +32,12 @@ func _ready() -> void:
 	spawn_ball()
 
 func _process(delta: float) -> void:
-	var dir = Input.get_axis("ui_left", "ui_right")
-	
-	position.x += dir * Speed * delta
-	
 	if timer.is_stopped() and Input.is_action_just_pressed("ui_accept"):
 		remove_child(ball)
 		
 		ball.position = global_position
+		
+		ball.connect("evolved", get_tree().current_scene._on_ball_evolved)
 		
 		Balls.add_child(ball)
 		

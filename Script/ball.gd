@@ -1,12 +1,12 @@
 extends RigidBody2D
 
+signal evolved(radius)
+
 @export var colors_grad : GradientTexture1D
 
 @onready var coll = $CollisionShape2D
 
 var radius = 0
-
-var evolve = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -20,11 +20,14 @@ func set_radius(i:float):
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Ball") and \
-	not freeze and not body.freeze and \
 	body.radius == radius and radius < 8:
 		set_radius(radius + 1)
 	
+		body.add_collision_exception_with(self)
+	
 		body.queue_free()
+		
+		evolved.emit(radius)
 
 func _process(_delta: float) -> void:
 	queue_redraw()
