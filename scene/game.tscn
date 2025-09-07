@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ms2jfbq0vp1o"]
+[gd_scene load_steps=13 format=3 uid="uid://ms2jfbq0vp1o"]
 
 [ext_resource type="Script" uid="uid://dd3m0qvakuskm" path="res://Script/node_2d.gd" id="1_dbls1"]
+[ext_resource type="Script" uid="uid://bjqrkmmlrq0ux" path="res://Script/game.gd" id="1_p1ry8"]
 [ext_resource type="Script" uid="uid://ckwek4ifek6er" path="res://Script/container.gd" id="1_xwcet"]
 [ext_resource type="Gradient" uid="uid://b4nm4ae7h44fo" path="res://Art/gradient.tres" id="2_33cqm"]
 [ext_resource type="Script" uid="uid://x2kniliynv1o" path="res://Script/dead_line.gd" id="4_xwcet"]
+[ext_resource type="Script" uid="uid://bq1mdubdcfvq0" path="res://Script/ui.gd" id="6_qpk70"]
+[ext_resource type="FontFile" uid="uid://cv11b5o8abax0" path="res://Art/Kenney Future Narrow.ttf" id="6_xlg7c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n4st5"]
 bounce = 0.5
@@ -21,7 +24,12 @@ gradient = ExtResource("2_33cqm")
 a = Vector2(158, 438)
 b = Vector2(328, 439)
 
+[sub_resource type="LabelSettings" id="LabelSettings_qpk70"]
+font = ExtResource("6_xlg7c")
+font_size = 64
+
 [node name="Game" type="Node"]
+script = ExtResource("1_p1ry8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_n4st5")
@@ -58,4 +66,32 @@ script = ExtResource("4_xwcet")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dead_line"]
 shape = SubResource("SegmentShape2D_33cqm")
 
+[node name="Timer" type="Timer" parent="dead_line"]
+wait_time = 3.0
+one_shot = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_qpk70")
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 52.0
+offset_bottom = 124.0
+grow_horizontal = 2
+text = "0000000"
+label_settings = SubResource("LabelSettings_qpk70")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="Path2D/PathFollow2D/Node2D/Timer" to="Path2D/PathFollow2D/Node2D" method="_on_timer_timeout"]
+[connection signal="body_entered" from="dead_line" to="dead_line" method="_on_body_entered"]
+[connection signal="stillInCollisionWithBall" from="dead_line" to="." method="_on_dead_line_still_in_collision_with_ball"]
+[connection signal="timeout" from="dead_line/Timer" to="dead_line" method="_on_timer_timeout"]
