@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ms2jfbq0vp1o"]
+[gd_scene load_steps=15 format=3 uid="uid://ms2jfbq0vp1o"]
 
 [ext_resource type="Script" uid="uid://dd3m0qvakuskm" path="res://Script/node_2d.gd" id="1_dbls1"]
 [ext_resource type="Script" uid="uid://bjqrkmmlrq0ux" path="res://Script/game.gd" id="1_p1ry8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://x2kniliynv1o" path="res://Script/dead_line.gd" id="4_xwcet"]
 [ext_resource type="Script" uid="uid://bq1mdubdcfvq0" path="res://Script/ui.gd" id="6_qpk70"]
 [ext_resource type="FontFile" uid="uid://cv11b5o8abax0" path="res://Art/Kenney Future Narrow.ttf" id="6_xlg7c"]
+[ext_resource type="Texture2D" uid="uid://batkoca65po5g" path="res://Art/return.png" id="8_ll5lq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n4st5"]
 bounce = 0.5
@@ -25,6 +26,10 @@ a = Vector2(158, 438)
 b = Vector2(328, 439)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qpk70"]
+font = ExtResource("6_xlg7c")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_ll5lq"]
 font = ExtResource("6_xlg7c")
 font_size = 64
 
@@ -79,6 +84,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_qpk70")
 
+[node name="OccludeRect" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
 [node name="ScoreLabel" type="Label" parent="UI"]
 layout_mode = 1
 anchors_preset = 10
@@ -91,7 +106,36 @@ label_settings = SubResource("LabelSettings_qpk70")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GameOverLabel" type="Label" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_ll5lq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="TextureButton" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -125.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(50, 50)
+texture_normal = ExtResource("8_ll5lq")
+stretch_mode = 3
+
 [connection signal="timeout" from="Path2D/PathFollow2D/Node2D/Timer" to="Path2D/PathFollow2D/Node2D" method="_on_timer_timeout"]
 [connection signal="body_entered" from="dead_line" to="dead_line" method="_on_body_entered"]
 [connection signal="stillInCollisionWithBall" from="dead_line" to="." method="_on_dead_line_still_in_collision_with_ball"]
 [connection signal="timeout" from="dead_line/Timer" to="dead_line" method="_on_timer_timeout"]
+[connection signal="button_down" from="UI/RetryButton" to="." method="_on_retry_button_button_down"]
