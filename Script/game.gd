@@ -30,7 +30,7 @@ func _on_retry_button_button_down() -> void:
 	get_tree().reload_current_scene()
 	
 func _on_ball_evolved(radius:int) -> void:
-	score += radius
+	score += remap(radius, 0, 8, 0, 100)
 	
 	ui.setScore(score)
 
