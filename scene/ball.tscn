@@ -16,7 +16,7 @@ radius = 12.0
 [node name="Ball" type="RigidBody2D" groups=["Ball"]]
 physics_material_override = SubResource("PhysicsMaterial_5kiuu")
 contact_monitor = true
-max_contacts_reported = 6
+max_contacts_reported = 12
 script = ExtResource("1_d8dhm")
 colors_grad = SubResource("GradientTexture1D_lhhrc")
 
